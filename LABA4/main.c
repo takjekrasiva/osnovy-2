@@ -9,7 +9,7 @@ void process_line(char buffer[]);
 int main(void)
 {
 	char line[MAXLINE];
-	printf("please, enter some words");
+	printf("please, enter some words \n");
 	gets(line);
 	process_line(line);
 	puts(line);
