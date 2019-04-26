@@ -12,10 +12,11 @@ int main(void)
 	int sum;//сумма в диаогнале
 	int maxi = 0;
 	int maxj = 0;
-	int maxk;
 	int k;
-	int maxjo;
-	int maxio;
+	int jo = -1;
+	int io = -1;
+	int q;
+	q = 0;
 	max = 0;
 	sum = 0;
 
@@ -47,15 +48,16 @@ int main(void)
 		if (sum > max)
 		{
 			max = sum;
-			maxi = i;
-			maxj = j;
-			maxk = N - 1;
-			maxjo = 0;
+			maxi = i-1;
+			maxj = j-1;
+			jo = 0;
+			io = N - 1 - q;
 		}
-		sum = 0;
+		q++;
 	}
 	
-	for (k = 1, i=0; k < N; k++, sum = 0,i=0)//считаем диагонали слева на право выше главной оси
+	
+	for (k = 1, i=0, q = 0 ; k < N; k++, sum = 0,i=0)//считаем диагонали слева на право выше главной оси
 	{
 		for (j = k; j < N; j++)
 		{
@@ -65,15 +67,15 @@ int main(void)
 		if (sum > max)
 		{
 			max = sum;
-			max = sum;
-			maxi = i;
-			maxj = j;
-			maxk = 1;
-			maxio = 0;
+			maxi = i-1;
+			maxj = j-1;
+			io = 0;
+			jo = 1 + q;
 		}
+		q++;
 	}
 
-	for (k = N - 1, j = N - 1; k >= 0; k--, j = N - 1, sum = 0)//считаем диагонали справа на лево ниже главной оси
+	for (k = N - 1, j = N - 1, q = 0; k >= 0; k--, sum = 0, j = N - 1)//считаем диагонали справа на лево ниже главной оси
 	{
 		for (i = k; i < N; i++)
 		{
@@ -83,15 +85,16 @@ int main(void)
 		if (sum > max)
 		{
 			max = sum;
-			max = sum;
-			maxi = i;
-			maxj = j;
-			maxk = k;
-			maxjo = N - 1;
+			maxi = i-1;
+			maxj = j+1;
+			io = N - 1-q;
+			jo = N - 1 ;
+			
 		}
+		q++;
 	}
 
-	for (k = N-2 , i = 0; k >= 0; k--, i = 0, sum = 0)//считаем диагонали справа на лево выше главной оси
+	for (k = N-2 , i = 0; k >= 0, q = 0; k--, sum = 0, i = 0)//считаем диагонали справа на лево выше главной оси
 	{
 		for (j = k; j >=0; j--)
 		{
@@ -101,17 +104,64 @@ int main(void)
 		if (sum > max)
 		{
 			max = sum;
-			max = sum;
-			maxi = i;
-			maxj = j;
-			maxk = k;
-			maxio = 0;
+			maxi = i-1;
+			maxj = j+1;
+			jo = N - 2 - q;
+			io = 0;
+		}
+		q++;
+	}
+	if (jo == 0) 
+	{
+		for (i = io, j = jo; i < N; i++)
+		{
+			
+			x[i][j] = 0;
+			j++;
 		}
 	}
-)
+	
+	
+	if ((io = 0) && (maxj = N - 1))
+	{
+		for (i = io, j = jo; j < N ; i++)
+		{
+			x[i][j] = 0;
+			j++;
+		}
+	}
 
+	
+	if (j == N - 1)
+	{
+		for (i = io, j = jo; i < N; i++)
+		{
 
-	printf("%d", max);
+			x[i][j] = 0;
+			j--;
+		}
+	}
 
-
+	if ((io = 0) && (maxj = 0))
+	{
+		for (i = io, j = jo; j >= 0; j--)
+		{
+			x[i][j] = 0;
+			i++;
+		}
+	}
+	
+	printf("\n");
+	printf("\n");
+	printf("\n");
+	for (i = 0; i < N; i++)//выводим массив
+	{
+		for (j = 0; j < K; j++)
+		{
+			printf("%-2d ", x[i][j]);
+		}
+		printf("\n");
+	}
+	
+	return 0;
 }
