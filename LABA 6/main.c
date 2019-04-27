@@ -38,9 +38,9 @@ int main(void)
 		printf("\n");
 	}
 
-	for (k = N-1, j = 0; k >=0;k--, sum = 0, j=0)//считаем диагонали слева на право ниже главной оси
+	for (k = N - 1, j = 0; k >= 0; k--, sum = 0, j = 0)//считаем диагонали слева на право ниже главной оси
 	{
-		for (i = k; i < N ; i++)
+		for (i = k; i < N; i++)
 		{
 			sum = x[i][j] + sum;
 			j++;
@@ -48,16 +48,16 @@ int main(void)
 		if (sum > max)
 		{
 			max = sum;
-			maxi = i-1;
-			maxj = j-1;
+			maxi = i - 1;
+			maxj = j - 1;
 			jo = 0;
 			io = N - 1 - q;
 		}
 		q++;
 	}
-	
-	
-	for (k = 1, i=0, q = 0 ; k < N; k++, sum = 0,i=0)//считаем диагонали слева на право выше главной оси
+
+
+	for (k = 1, i = 0, q = 0; k < N; k++, sum = 0, i = 0)//считаем диагонали слева на право выше главной оси
 	{
 		for (j = k; j < N; j++)
 		{
@@ -67,8 +67,8 @@ int main(void)
 		if (sum > max)
 		{
 			max = sum;
-			maxi = i-1;
-			maxj = j-1;
+			maxi = i - 1;
+			maxj = j - 1;
 			io = 0;
 			jo = 1 + q;
 		}
@@ -79,24 +79,24 @@ int main(void)
 	{
 		for (i = k; i < N; i++)
 		{
-			sum = x[i][j] + sum ;
+			sum = x[i][j] + sum;
 			j--;
 		}
 		if (sum > max)
 		{
 			max = sum;
-			maxi = i-1;
-			maxj = j+1;
-			io = N - 1-q;
-			jo = N - 1 ;
-			
+			maxi = i - 1;
+			maxj = j + 1;
+			io = N - 1 - q;
+			jo = N - 1;
+
 		}
 		q++;
 	}
 
-	for (k = N-2 , i = 0; k >= 0, q = 0; k--, sum = 0, i = 0)//считаем диагонали справа на лево выше главной оси
+	for (k = N - 2, i = 0; k >= 0, q = 0; k--, sum = 0, i = 0)//считаем диагонали справа на лево выше главной оси
 	{
-		for (j = k; j >=0; j--)
+		for (j = k; j >= 0; j--)
 		{
 			sum = x[i][j] + sum;
 			i++;
@@ -104,35 +104,35 @@ int main(void)
 		if (sum > max)
 		{
 			max = sum;
-			maxi = i-1;
-			maxj = j+1;
+			maxi = i - 1;
+			maxj = j + 1;
 			jo = N - 2 - q;
 			io = 0;
 		}
 		q++;
 	}
-	if (jo == 0) 
+	if (jo == 0)
 	{
 		for (i = io, j = jo; i < N; i++)
 		{
-			
+
 			x[i][j] = 0;
 			j++;
 		}
 	}
-	
-	
-	if ((io = 0) && (maxj = N - 1))
+
+
+	if ((io == 0) && (maxj == N - 1))
 	{
-		for (i = io, j = jo; j < N ; i++)
+		for (i = io, j = jo; j < N; i++)
 		{
 			x[i][j] = 0;
 			j++;
 		}
 	}
 
-	
-	if (j == N - 1)
+
+	if (jo == N - 1)
 	{
 		for (i = io, j = jo; i < N; i++)
 		{
@@ -142,7 +142,7 @@ int main(void)
 		}
 	}
 
-	if ((io = 0) && (maxj = 0))
+	if ((io == 0) && (maxj == 0))
 	{
 		for (i = io, j = jo; j >= 0; j--)
 		{
@@ -150,7 +150,7 @@ int main(void)
 			i++;
 		}
 	}
-	
+
 	printf("\n");
 	printf("\n");
 	printf("\n");
@@ -162,6 +162,6 @@ int main(void)
 		}
 		printf("\n");
 	}
-	
+
 	return 0;
 }
