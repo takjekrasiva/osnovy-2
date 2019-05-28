@@ -45,7 +45,7 @@ int main(void)
 			sum = x[i][j] + sum;
 			j++;
 		}
-		if (sum > max)
+		if (sum >= max)
 		{
 			max = sum;
 			maxi = i - 1;
@@ -64,7 +64,7 @@ int main(void)
 			sum = x[i][j] + sum;
 			i++;
 		}
-		if (sum > max)
+		if (sum >= max)
 		{
 			max = sum;
 			maxi = i - 1;
@@ -82,7 +82,7 @@ int main(void)
 			sum = x[i][j] + sum;
 			j--;
 		}
-		if (sum > max)
+		if (sum >= max)
 		{
 			max = sum;
 			maxi = i - 1;
@@ -100,7 +100,7 @@ int main(void)
 			sum = x[i][j] + sum;
 			i++;
 		}
-		if (sum > max)
+		if (sum >= max)
 		{
 			max = sum;
 			maxi = i - 1;
@@ -110,7 +110,7 @@ int main(void)
 		}
 		q++;
 	}
-	if (jo == 0)
+	if ((jo == 0)&(maxj == j-1))
 	{
 		for (i = io, j = jo; i < N; i++)
 		{
