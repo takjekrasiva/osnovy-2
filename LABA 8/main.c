@@ -22,34 +22,32 @@ void process_line(char buffer[])
 	char c;// Текущий символ
 	int word = NO;//признак слова
 	int symb = NO;//индикатор наличия лишних символов
-	int cur = 0;//позиция текущего символа исходной строки
-	int res = 0;//позиция текущего символа результирующей строки
-	int start = 0;//позиция начала слова
 	int vowel = 0;//счетчик гласных букв
 	int conso = 0;// счетски согласных букв
-	int j;
+	char *in_ptr; // указатель на текущий символ входной строки  
+	char *out_ptr;   // указатель на текущий символn выходной строки  
+	char *word_ptr; // указатель на начало слова 
+	word_ptr = buffer;
+	in_ptr = buffer;
+	out_ptr = buffer;
 
 	do
 	{
-		c = buffer[cur]; // взять текущий символ из буфера
+		c = *in_ptr; // взять текущий символ из буфера
 		if (c == ' ' || c == '.' || c == ',' || c == '\n' || c == '\0' || c == '?' || c == '!' || c == ';' || c == ':' ||
 			c == '-' || c == '_' || c == '(' || c == ')' || c == '\t' || c == '/' || c == '&' || c == '"') // разделитель найден
 		{
-			if (symb == NO && word == YES && conso >= vowel || symb == NO && word == YES)
+			if (symb == NO && word == YES && conso >= vowel)
 			{
-				for (j = start; j <= cur; j++)
-				{
-					buffer[res++] = buffer[j];//копируем слово
-				}
-			}
-			else
-			{
-				buffer[res++] = buffer[cur];//возвращаем разделитель на место
+				while (word_ptr < in_ptr)
+
+					*out_ptr++ = *word_ptr++; //
 			}
 			word = NO;
 			symb = NO;
 			conso = 0;
 			vowel = 0;
+			*out_ptr++ = c;
 		}
 
 		else
@@ -60,7 +58,7 @@ void process_line(char buffer[])
 			}
 			if (word == NO) // найдена первая буква слова
 			{
-				start = cur; // запомнить позицию начала слова
+				word_ptr = in_ptr; // запомнить позицию начала слова
 			}
 			if (c == 'e' || c == 'y' || c == 'u' || c == 'i' || c == 'o' || c == 'a' ||
 				c == 'E' || c == 'Y' || c == 'U' || c == 'I' || c == 'O' || c == 'A') // если была найдена гл буква, то выполнить...
@@ -76,8 +74,6 @@ void process_line(char buffer[])
 			word = YES;
 		}
 
-		cur++;
+		in_ptr++;
 	} while (c != '\0'); // продолжать до конца строки
-	buffer[res] = '\0';// устанавливаем конец файла
-
 }
